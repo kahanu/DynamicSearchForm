@@ -1,3 +1,4 @@
-export const config: any[] = [
-  {}
+import { FormDataItem } from './models';
+
+export const config: FormDataItem[] = [
 ];

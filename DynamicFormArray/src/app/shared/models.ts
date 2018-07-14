@@ -29,6 +29,7 @@ export class SearchCriteria {
 }
 
 export class FormDataItem {
+  FieldName: string;
   InputName: string;
   InputType: string;
 }

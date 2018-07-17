@@ -1,32 +1,52 @@
 <div class="container">
-  <form [formGroup]="customerForm">
-    <div formArrayName="items" *ngFor="let item of customerForm.get('items')['controls']; let i = index;">
-      <div [formGroupName]="i">
-
-        <select formControlName="labelName">
-          <option value="FirstName">First Name</option>
-          <option value="LastName">Last Name</option>
-          <option value="Phone">Phone</option>
-          <option value="ContributionAmount">Contribution Amount</option>
-          <option value="StartDate">Start Date</option>
-        </select>
-
-        <input [type]="customerForm.get('items')['controls'][i].controls.inputType.value" formControlName="fieldValue" placeholder="Field Value">
-
-        <select formControlName="operation">
-          <option value="EqualTo">Equal To</option>
-          <option value="StartsWith">Starts With</option>
-          <option value="GreaterThan">Greater Than</option>
-          <option value="LessThan">Less Than</option>
-        </select>
-
-        <button (click)="addItem()" title="Add Item">+</button>
-        <button (click)="removeItem(i)" title="Remove Item">-</button>
-      </div>
-      <!-- Chosen name: {{ customerForm.get('items')['controls'][i].controls.fieldValue.value }} -->
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Dynamic Search Form</h3>
+      <p>Angular 5+ dynamic search form creates an array of search terms that you can send to your service.</p>
     </div>
+  </div>
+  <form [formGroup]="customerForm">
+
+    <div class="row">
+      <div formArrayName="items" *ngFor="let item of customerForm.get('items')['controls']; let i = index;">
+        <div [formGroupName]="i">
+          <div class="form-group col-md-3">
+            <select formControlName="labelName" class="form-control" (change)="onLabelChange($event.target.value, i)">
+              <option [value]="label.value" *ngFor="let label of labelArray">{{ label.text }}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <input [type]="customerForm.get('items')['controls'][i].controls.inputType.value" formControlName="fieldValue" placeholder="Field Value"
+              class="form-control">
+          </div>
+          <div class="form-group col-md-3">
+            <select formControlName="operation" class="form-control">
+              <option [value]="op" *ngFor="let op of supportedTypes">{{ op }}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <button (click)="addItem()" title="Add Item">+</button>
+            <button (click)="removeItem(i)" title="Remove Item">-</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chosen name: {{ customerForm.get('items')['controls'][i].controls.fieldValue.value }} -->
+
     <div>
-      <button (click)="save()">Save</button>
+      <button (click)="save()" class="btn btn-primary">Save</button>
     </div>
   </form>
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Raw Form Results</h4>
+      <pre *ngIf="results">{{ results | json }}</pre>
+    </div>
+    <div class="col-md-6">
+      <h4>Mapped Search Criteria List Array</h4>
+      <pre *ngIf="criteriaList">{{ criteriaList | json }}</pre>
+    </div>
+  </div>
+
 </div>

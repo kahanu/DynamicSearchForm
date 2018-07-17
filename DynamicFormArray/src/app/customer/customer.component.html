@@ -19,10 +19,8 @@
             <input [type]="customerForm.get('items')['controls'][i].controls.inputType.value" formControlName="fieldValue" placeholder="Field Value"
               class="form-control">
           </div>
-          <div class="form-group col-md-3">
-            <select formControlName="operation" class="form-control">
-              <option [value]="op" *ngFor="let op of supportedTypes">{{ op }}</option>
-            </select>
+          <div class="form-group col-md-3" *ngIf="selectedDataType">
+            <app-form-select [form]="customerForm.get('items')['controls'][i]" [type]="selectedDataType" [controlName]="'operation'"></app-form-select>
           </div>
           <div class="form-group col-md-2">
             <button (click)="addItem()" title="Add Item">+</button>

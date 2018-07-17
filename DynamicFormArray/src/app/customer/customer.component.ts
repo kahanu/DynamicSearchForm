@@ -14,6 +14,7 @@ export class CustomerComponent implements OnInit {
   criteriaList: SearchCriteria[];
   labelArray = labelArrayData;
   supportedTypes: any[] = [];
+  selectedDataType: string;
 
   constructor(private fb: FormBuilder) { }
 
@@ -23,27 +24,33 @@ export class CustomerComponent implements OnInit {
 
   createItem(item?: any): FormGroup {
     return this.fb.group({
-      labelName: [item ? item.labelName : ''],
+      labelName: [item ? item.labelName : 'Phone'],
       fieldValue: [item ? item.fieldValue : ''],
-      operation: [item ? item.operation : ''],
-      dataType: [item ? item.dataType : ''],
-      inputType: [item ? item.inputType : '']
+      operation: [item ? item.operation : 'EqualTo'],
+      dataType: [item ? item.dataType : 'String'],
+      inputType: [item ? item.inputType : 'text']
     });
   }
 
   initForm() {
     this.customerForm = this.fb.group({
-      items: this.fb.array([
-        this.createItem({ labelName: 'Phone', fieldValue: '818 384-4438', operation: 'EqualTo', dataType: 'String', inputType: 'text'}),
-        this.createItem({ labelName: 'FirstName', fieldValue: 'John', operation: 'EqualTo', dataType: 'String', inputType: 'text'}),
-        this.createItem({
-          labelName: 'StartDate',
-          fieldValue: new Date('2018-04-29T15:26:32').toISOString().substring(0, 10),
-          operation: 'LessThan', dataType: 'DateTimeOffset', inputType: 'date'}),
-        this.createItem({
-          labelName: 'ContributionAmount', fieldValue: '123.45', operation: 'GreaterThan', dataType: 'Decimal', inputType: 'number'})
-      ])
+      items: this.fb.array([])
     });
+
+    this.addItem();
+
+    // this.customerForm = this.fb.group({
+    //   items: this.fb.array([
+    //     this.createItem({ labelName: 'Phone', fieldValue: '818 384-4438', operation: 'EqualTo', dataType: 'String', inputType: 'text'}),
+    //     this.createItem({ labelName: 'FirstName', fieldValue: 'John', operation: 'EqualTo', dataType: 'String', inputType: 'text'}),
+    //     this.createItem({
+    //       labelName: 'StartDate',
+    //       fieldValue: new Date('2018-04-29T15:26:32').toISOString().substring(0, 10),
+    //       operation: 'LessThan', dataType: 'DateTimeOffset', inputType: 'date'}),
+    //     this.createItem({
+    //       labelName: 'ContributionAmount', fieldValue: '123.45', operation: 'GreaterThan', dataType: 'Decimal', inputType: 'number'})
+    //   ])
+    // });
   }
 
   save() {
@@ -55,6 +62,7 @@ export class CustomerComponent implements OnInit {
   addItem() {
     const items = <FormArray>this.customerForm.get('items');
     items.push(this.createItem());
+    this.onLabelChange('Phone', 0);
   }
 
   removeItem(index: number) {
@@ -66,6 +74,7 @@ export class CustomerComponent implements OnInit {
     // console.log('selected value: ', value);
     const labelObj = labelArrayData.find(item => item.value === value);
     // console.log('selected object: ', labelObj);
+    this.selectedDataType = labelObj.dataType;
     this.getSelectedOperations(labelObj.dataType, index);
   }
 
@@ -85,13 +94,13 @@ export class CustomerComponent implements OnInit {
 
   getSelectedOperations(type: any, index: number) {
     const typegroup = typeGroup.find(item => item.type === type);
-    console.log('typegroup: ', typegroup);
+    // console.log('typegroup: ', typegroup);
     this.loadSupportedTypes(typegroup, index);
   }
 
   loadSupportedTypes(typegroup: any, index: number) {
     const control = this.customerForm.get('items')['controls'][index];
-console.log('control: ', control);
+// console.log('control: ', control);
     this.supportedTypes = typegroup.supportedTypes;
   }
 }

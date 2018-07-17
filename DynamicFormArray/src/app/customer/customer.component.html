@@ -1,37 +1,32 @@
-<form [formGroup]="customerForm">
-  <div formArrayName="items" *ngFor="let item of customerForm.get('items')['controls']; let i = index;">
-    <div [formGroupName]="i">
-      <select formControlName="labelName">
-        <option value="FirstName">First Name</option>
-        <option value="LastName">Last Name</option>
-        <option value="Phone">Phone</option>
-        <option value="ContributionAmount">Contribution Amount</option>
-        <option value="To">To</option>
-      </select>
-      <div [ngSwitch]="item.inputType">
-        <div *ngSwitchCase="'text'">
-          <input type="text" formControlName="fieldValue" placeholder="Field Value">
-        </div>
-        <div *ngSwitchCase="'number'">
-          <input type="number" formControlName="fieldValue" placeholder="Field Value">
-        </div>
-        <div *ngSwitchCase="'date'">
-          <input type="date" formControlName="fieldValue" placeholder="Field Value">
-        </div>
+<div class="container">
+  <form [formGroup]="customerForm">
+    <div formArrayName="items" *ngFor="let item of customerForm.get('items')['controls']; let i = index;">
+      <div [formGroupName]="i">
+
+        <select formControlName="labelName">
+          <option value="FirstName">First Name</option>
+          <option value="LastName">Last Name</option>
+          <option value="Phone">Phone</option>
+          <option value="ContributionAmount">Contribution Amount</option>
+          <option value="StartDate">Start Date</option>
+        </select>
+
+        <input [type]="customerForm.get('items')['controls'][i].controls.inputType.value" formControlName="fieldValue" placeholder="Field Value">
+
+        <select formControlName="operation">
+          <option value="EqualTo">Equal To</option>
+          <option value="StartsWith">Starts With</option>
+          <option value="GreaterThan">Greater Than</option>
+          <option value="LessThan">Less Than</option>
+        </select>
+
+        <button (click)="addItem()" title="Add Item">+</button>
+        <button (click)="removeItem(i)" title="Remove Item">-</button>
       </div>
-
-      <select formControlName="operation">
-        <option value="EqualTo">Equal To</option>
-        <option value="StartsWith">Starts With</option>
-        <option value="GreaterThan">Greater Than</option>
-        <option value="LessThan">Less Than</option>
-      </select>
-      <span>{{ item['inputType'] }}</span>
+      <!-- Chosen name: {{ customerForm.get('items')['controls'][i].controls.fieldValue.value }} -->
     </div>
-
-    <!-- Chosen name: {{ customerForm.get('items')['controls'][i].controls.fieldValue.value }} -->
-  </div>
-  <div>
-    <button (click)="save()">Save</button>
-  </div>
-</form>
+    <div>
+      <button (click)="save()">Save</button>
+    </div>
+  </form>
+</div>

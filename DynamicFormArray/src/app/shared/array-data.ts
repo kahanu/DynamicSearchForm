@@ -1,8 +1,8 @@
 import { FormDataItem } from './models';
 
 export const formArrayData: FormDataItem[] = [
-  { InputName: 'FirstName', InputType: 'text' },
-  { InputName: 'LastName', InputType: 'text' },
-  { InputName: 'Age', InputType: 'number' },
-  { InputName: 'Birthday', InputType: 'date' }
+  { FieldName: 'First Name', InputName: 'FirstName', InputType: 'text' },
+  { FieldName: 'Last Name', InputName: 'LastName', InputType: 'text' },
+  { FieldName: 'Age', InputName: 'Age', InputType: 'number' },
+  { FieldName: 'Birthday', InputName: 'Birthday', InputType: 'date' }
 ];

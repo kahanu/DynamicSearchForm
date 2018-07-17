@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-customer',
@@ -17,11 +17,11 @@ export class CustomerComponent implements OnInit {
 
   createItem(item?: any): FormGroup {
     return this.fb.group({
-      labelName: item.labelName,
-      fieldValue: item.fieldValue,
-      operation: item.operation,
-      dataType: item.dataType,
-      inputType: item.inputType
+      labelName: [item ? item.labelName : ''],
+      fieldValue: [item ? item.fieldValue : ''],
+      operation: [item ? item.operation : ''],
+      dataType: [item ? item.dataType : ''],
+      inputType: [item ? item.inputType : '']
     });
   }
 
@@ -31,7 +31,8 @@ export class CustomerComponent implements OnInit {
         this.createItem({ labelName: 'Phone', fieldValue: '818 384-4438', operation: 'EqualTo', dataType: 'String', inputType: 'text'}),
         this.createItem({ labelName: 'FirstName', fieldValue: 'John', operation: 'EqualTo', dataType: 'String', inputType: 'text'}),
         this.createItem({
-          labelName: 'To', fieldValue: new Date('2018-04-29'), operation: 'LessThan', dataType: 'DateTimeOffset', inputType: 'date'}),
+          labelName: 'StartDate',
+          fieldValue: new Date('2018-04-29T15:26:32'), operation: 'LessThan', dataType: 'DateTimeOffset', inputType: 'date'}),
         this.createItem({
           labelName: 'ContributionAmount', fieldValue: '123.45', operation: 'GreaterThan', dataType: 'Decimal', inputType: 'number'})
       ])
@@ -42,4 +43,13 @@ export class CustomerComponent implements OnInit {
     console.log(this.customerForm.value);
   }
 
+  addItem() {
+    const items = <FormArray>this.customerForm.get('items');
+    items.push(this.createItem());
+  }
+
+  removeItem(index: number) {
+    const items = <FormArray>this.customerForm.get('items');
+    items.removeAt(index);
+  }
 }

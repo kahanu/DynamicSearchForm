@@ -22,33 +22,19 @@ export class RowSearchComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    // this.onLabelChange('Phone');
-    console.log('row search init form');
     this.initForm();
   }
 
   initForm() {
-    this.rowForm = this.createItem();
     this.onLabelChange('Phone');
-  }
-
-  createItem(item?: any): FormGroup {
-    return this.fb.group({
-      labelName: [item ? item.labelName : 'Phone'],
-      fieldValue: [item ? item.fieldValue : ''],
-      operation: [item ? item.operation : 'EqualTo'],
-      dataType: [item ? item.dataType : 'String'],
-      inputType: [item ? item.inputType : 'text']
-    });
   }
 
   onLabelChange(value: any) {
     const labelObj: SelectState = labelArrayData.find(
       item => item.value === value
     );
-    // console.log('label: ', labelObj);
-    // this.pubSub.publishSelect(labelObj);
     this.getSelectedOperations(labelObj.dataType);
+    this.selectedDataType = labelObj.dataType;
   }
 
   addItem() {
@@ -56,18 +42,15 @@ export class RowSearchComponent implements OnInit {
   }
 
   removeItem() {
-    // console.log('remove row: ', this.row);
     this.removeRow.emit(this.row);
   }
 
   getSelectedOperations(type: any) {
     const typegroup = typeGroup.find(item => item.type === type);
-    // console.log('typegroup: ', typegroup);
     this.loadSupportedTypes(typegroup);
   }
 
   loadSupportedTypes(typegroup: any) {
     this.supportedTypes = typegroup.supportedTypes;
-    console.log('supported types: ', this.supportedTypes);
   }
 }

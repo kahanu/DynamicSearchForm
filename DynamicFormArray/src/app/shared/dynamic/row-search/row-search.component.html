@@ -4,11 +4,17 @@
       <option [value]="label.value" *ngFor="let label of labelArray">{{ label.text }}</option>
     </select>
   </div>
-  <div class="form-group col-md-3" *ngIf="supportedTypes">
+  <div class="form-group col-md-2" *ngIf="supportedTypes">
     <app-form-select [form]="rowForm" [controlName]="'operation'" [supportedTypes]="supportedTypes"></app-form-select>
   </div>
   <div class="form-group col-md-4">
-    <input [type]="rowForm.get('inputType').value" formControlName="fieldValue" placeholder="Field Value" class="form-control">
+    <input [type]="selectedDataType" formControlName="fieldValue" placeholder="Field Value" class="form-control">
+  </div>
+  <div class="form-group col-md-1">
+    <select class="form-control" formControlName="connector">
+        <option value="Or">Or</option>
+        <option value="And">And</option>
+    </select>
   </div>
   <div class="form-group col-md-2">
     <button (click)="addItem()" title="Add Item">+</button>

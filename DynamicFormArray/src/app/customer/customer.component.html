@@ -13,23 +13,6 @@
 
           <app-row-search [rowForm]="customerForm.get('items')['controls'][i]" [row]="i" (addRow)="addRow()" (removeRow)="removeRow($event)"></app-row-search>
 
-          <!-- <div class="form-group col-md-3">
-            <select formControlName="labelName" class="form-control" (change)="onLabelChange($event.target.value, i)">
-              <option [value]="label.value" *ngFor="let label of labelArray">{{ label.text }}</option>
-            </select>
-          </div>
-          <div class="form-group col-md-4">
-            <input [type]="customerForm.get('items')['controls'][i].controls.inputType.value" formControlName="fieldValue" placeholder="Field Value"
-              class="form-control">
-          </div>
-          <div class="form-group col-md-3" *ngIf="selectedDataType">
-            <app-form-select [form]="customerForm.get('items')['controls'][i]" [controlName]="'operation'"></app-form-select>
-          </div>
-          <div class="form-group col-md-2">
-            <button (click)="addItem()" title="Add Item">+</button>
-            <button (click)="removeItem(i)" title="Remove Item">-</button>
-          </div> -->
-
           </div>
       </div>
     </div>

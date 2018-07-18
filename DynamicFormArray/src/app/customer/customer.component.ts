@@ -30,7 +30,8 @@ export class CustomerComponent implements OnInit {
       fieldValue: [item ? item.fieldValue : ''],
       operation: [item ? item.operation : 'EqualTo'],
       dataType: [item ? item.dataType : 'String'],
-      inputType: [item ? item.inputType : 'text']
+      inputType: [item ? item.inputType : 'text'],
+      connector: [item ? item.connector : 'Or']
     });
   }
 
@@ -40,36 +41,20 @@ export class CustomerComponent implements OnInit {
     });
 
     this.addItem();
-
-    // this.customerForm = this.fb.group({
-    //   items: this.fb.array([
-    //     this.createItem({ labelName: 'Phone', fieldValue: '818 384-4438', operation: 'EqualTo', dataType: 'String', inputType: 'text'}),
-    //     this.createItem({ labelName: 'FirstName', fieldValue: 'John', operation: 'EqualTo', dataType: 'String', inputType: 'text'}),
-    //     this.createItem({
-    //       labelName: 'StartDate',
-    //       fieldValue: new Date('2018-04-29T15:26:32').toISOString().substring(0, 10),
-    //       operation: 'LessThan', dataType: 'DateTimeOffset', inputType: 'date'}),
-    //     this.createItem({
-    //       labelName: 'ContributionAmount', fieldValue: '123.45', operation: 'GreaterThan', dataType: 'Decimal', inputType: 'number'})
-    //   ])
-    // });
   }
 
   save() {
-    console.log(this.customerForm.value);
     this.results = this.customerForm.value;
     this.mapToCriteria(this.results);
   }
 
   addRow() {
-    console.log('adding row');
     this.addItem();
   }
 
   addItem() {
     const items = <FormArray>this.customerForm.get('items');
     items.push(this.createItem());
-    // this.onLabelChange('Phone', 0);
   }
 
   removeRow(row: number) {
@@ -81,13 +66,13 @@ export class CustomerComponent implements OnInit {
     items.removeAt(index);
   }
 
-  onLabelChange(value: any, index: number) {
-    const labelObj: SelectState = labelArrayData.find(
-      item => item.value === value
-    );
-    console.log('label: ', labelObj);
-    // this.pubSub.publishSelect(labelObj);
-  }
+  // onLabelChange(value: any, index: number) {
+  //   const labelObj: SelectState = labelArrayData.find(
+  //     item => item.value === value
+  //   );
+  //   console.log('label: ', labelObj);
+  //   // this.pubSub.publishSelect(labelObj);
+  // }
 
   mapToCriteria(formData: any) {
     const criteriaList: SearchCriteria[] = [];
@@ -97,21 +82,21 @@ export class CustomerComponent implements OnInit {
       criteria.FieldValue = element.fieldValue;
       criteria.OperationName = element.operation;
       criteria.Type = element.dataType;
-      criteria.Connector = 'Or';
+      criteria.Connector = element.connector;
       criteriaList.push(criteria);
     });
     this.criteriaList = criteriaList;
   }
 
-  getSelectedOperations(type: any, index: number) {
-    const typegroup = typeGroup.find(item => item.type === type);
-    // console.log('typegroup: ', typegroup);
-    this.loadSupportedTypes(typegroup, index);
-  }
+  // getSelectedOperations(type: any, index: number) {
+  //   const typegroup = typeGroup.find(item => item.type === type);
+  //   // console.log('typegroup: ', typegroup);
+  //   this.loadSupportedTypes(typegroup, index);
+  // }
 
-  loadSupportedTypes(typegroup: any, index: number) {
-    const control = this.customerForm.get('items')['controls'][index];
-    // console.log('control: ', control);
-    this.supportedTypes = typegroup.supportedTypes;
-  }
+  // loadSupportedTypes(typegroup: any, index: number) {
+  //   const control = this.customerForm.get('items')['controls'][index];
+  //   // console.log('control: ', control);
+  //   this.supportedTypes = typegroup.supportedTypes;
+  // }
 }

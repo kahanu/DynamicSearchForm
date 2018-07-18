@@ -14,37 +14,37 @@ export class FormSelectComponent implements OnInit, OnChanges {
   // @Input() type: string;
   @Input() controlName: string;
 
-  supportedTypes: any[] = [];
+  @Input() supportedTypes: any[] = [];
 
   constructor(private pubSub: PubSubService) {
-    this.pubSub.getSelect().subscribe((res: SelectState) => {
-      console.log('pub sub ctor res: ', res);
-      if (res) {
-        this.getSelectedOperations(res);
-      }
-    });
+    // this.pubSub.getSelect().subscribe((res: SelectState) => {
+    //   console.log('pub sub ctor res: ', res);
+    //   if (res) {
+    //     this.getSelectedOperations(res);
+    //   }
+    // });
   }
 
   ngOnInit() {
     // console.log('type: ', this.type);
     // this.getSelectedOperations(this.type);
-    this.pubSub.getSelect().subscribe((res: SelectState) => {
-      console.log('pub sub init res: ', res);
-      if (res) {
-        this.getSelectedOperations(res);
-      }
-    });
+    // this.pubSub.getSelect().subscribe((res: SelectState) => {
+    //   console.log('pub sub init res: ', res);
+    //   if (res) {
+    //     this.getSelectedOperations(res);
+    //   }
+    // });
   }
 
   ngOnChanges() {
     // console.log('changed type: ', this.type);
     // this.getSelectedOperations(this.type);
-    this.pubSub.getSelect().subscribe((res: SelectState) => {
-      console.log('pub sub changes res: ', res);
-      if (res) {
-        this.getSelectedOperations(res);
-      }
-    });
+    // this.pubSub.getSelect().subscribe((res: SelectState) => {
+    //   console.log('pub sub changes res: ', res);
+    //   if (res) {
+    //     this.getSelectedOperations(res);
+    //   }
+    // });
   }
 
   getSelectedOperations(type: any) {

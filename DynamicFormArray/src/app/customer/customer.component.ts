@@ -61,10 +61,19 @@ export class CustomerComponent implements OnInit {
     this.mapToCriteria(this.results);
   }
 
+  addRow() {
+    console.log('adding row');
+    this.addItem();
+  }
+
   addItem() {
     const items = <FormArray>this.customerForm.get('items');
     items.push(this.createItem());
-    this.onLabelChange('Phone', 0);
+    // this.onLabelChange('Phone', 0);
+  }
+
+  removeRow(row: number) {
+    this.removeItem(row);
   }
 
   removeItem(index: number) {
@@ -77,7 +86,7 @@ export class CustomerComponent implements OnInit {
       item => item.value === value
     );
     console.log('label: ', labelObj);
-    this.pubSub.publishSelect(labelObj);
+    // this.pubSub.publishSelect(labelObj);
   }
 
   mapToCriteria(formData: any) {

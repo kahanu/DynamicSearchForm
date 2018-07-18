@@ -9,8 +9,11 @@
 
     <div class="row">
       <div formArrayName="items" *ngFor="let item of customerForm.get('items')['controls']; let i = index;">
-        <div [formGroupName]="i">
-          <div class="form-group col-md-3">
+          <div [formGroupName]="i">
+
+          <app-row-search [rowForm]="customerForm.get('items')['controls'][i]" [row]="i" (addRow)="addRow()" (removeRow)="removeRow($event)"></app-row-search>
+
+          <!-- <div class="form-group col-md-3">
             <select formControlName="labelName" class="form-control" (change)="onLabelChange($event.target.value, i)">
               <option [value]="label.value" *ngFor="let label of labelArray">{{ label.text }}</option>
             </select>
@@ -25,8 +28,9 @@
           <div class="form-group col-md-2">
             <button (click)="addItem()" title="Add Item">+</button>
             <button (click)="removeItem(i)" title="Remove Item">-</button>
+          </div> -->
+
           </div>
-        </div>
       </div>
     </div>
 

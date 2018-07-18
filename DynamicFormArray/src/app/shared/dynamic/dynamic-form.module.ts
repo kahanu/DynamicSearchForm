@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormSelectComponent } from './form-select/form-select.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RowSearchComponent } from './row-search/row-search.component';
 
 @NgModule({
   imports: [
@@ -9,10 +10,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   declarations: [
-    FormSelectComponent
+    FormSelectComponent,
+    RowSearchComponent
   ],
   exports: [
-    FormSelectComponent
+    // FormSelectComponent
+    RowSearchComponent
   ],
   entryComponents: [
     FormSelectComponent

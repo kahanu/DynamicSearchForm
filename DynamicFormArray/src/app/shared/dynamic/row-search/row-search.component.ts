@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { SelectState } from '../../pubsub/models';
 import { labelArrayData, typeGroup } from '../../form-config';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
 
 @Component({
@@ -11,13 +11,14 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class RowSearchComponent implements OnInit {
   @Input() rowForm: FormGroup;
+  @Input() parentForm: FormGroup;
   @Input() row: any;
   labelArray = labelArrayData;
   selectedDataType: string;
   supportedTypes: any[] = [];
 
-  @Output() addRow: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() removeRow: EventEmitter<any> = new EventEmitter<any>();
+  // @Output() addRow: EventEmitter<boolean> = new EventEmitter<boolean>();
+  // @Output() removeRow: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder) { }
 
@@ -37,12 +38,9 @@ export class RowSearchComponent implements OnInit {
     this.selectedDataType = labelObj.dataType;
   }
 
-  addItem() {
-    this.addRow.emit(true);
-  }
-
   removeItem() {
-    this.removeRow.emit(this.row);
+    const items = <FormArray>this.parentForm.get('items');
+    items.removeAt(this.row);
   }
 
   getSelectedOperations(type: any) {
@@ -52,5 +50,22 @@ export class RowSearchComponent implements OnInit {
 
   loadSupportedTypes(typegroup: any) {
     this.supportedTypes = typegroup.supportedTypes;
+  }
+
+
+  createItem(item?: any): FormGroup {
+    return this.fb.group({
+      labelName: [item ? item.labelName : 'Phone'],
+      fieldValue: [item ? item.fieldValue : ''],
+      operation: [item ? item.operation : 'EqualTo'],
+      dataType: [item ? item.dataType : 'String'],
+      inputType: [item ? item.inputType : 'text'],
+      connector: [item ? item.connector : 'Or']
+    });
+  }
+
+  addItem() {
+    const items = <FormArray>this.parentForm.get('items');
+    items.push(this.createItem());
   }
 }

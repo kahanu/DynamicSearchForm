@@ -18,21 +18,10 @@ export class CustomerComponent implements OnInit {
   supportedTypes: any[] = [];
   selectedDataType: string;
 
-  constructor(private fb: FormBuilder, private pubSub: PubSubService) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.initForm();
-  }
-
-  createItem(item?: any): FormGroup {
-    return this.fb.group({
-      labelName: [item ? item.labelName : 'Phone'],
-      fieldValue: [item ? item.fieldValue : ''],
-      operation: [item ? item.operation : 'EqualTo'],
-      dataType: [item ? item.dataType : 'String'],
-      inputType: [item ? item.inputType : 'text'],
-      connector: [item ? item.connector : 'Or']
-    });
   }
 
   initForm() {
@@ -46,10 +35,22 @@ export class CustomerComponent implements OnInit {
   save() {
     this.results = this.customerForm.value;
     this.mapToCriteria(this.results);
+    // TODO: send criteriaList to the web service.
   }
 
-  addRow() {
-    this.addItem();
+  // addRow() {
+  //   this.addItem();
+  // }
+
+  createItem(item?: any): FormGroup {
+    return this.fb.group({
+      labelName: [item ? item.labelName : 'Phone'],
+      fieldValue: [item ? item.fieldValue : ''],
+      operation: [item ? item.operation : 'EqualTo'],
+      dataType: [item ? item.dataType : 'String'],
+      inputType: [item ? item.inputType : 'text'],
+      connector: [item ? item.connector : 'Or']
+    });
   }
 
   addItem() {
@@ -57,23 +58,20 @@ export class CustomerComponent implements OnInit {
     items.push(this.createItem());
   }
 
-  removeRow(row: number) {
-    this.removeItem(row);
-  }
-
-  removeItem(index: number) {
-    const items = <FormArray>this.customerForm.get('items');
-    items.removeAt(index);
-  }
-
-  // onLabelChange(value: any, index: number) {
-  //   const labelObj: SelectState = labelArrayData.find(
-  //     item => item.value === value
-  //   );
-  //   console.log('label: ', labelObj);
-  //   // this.pubSub.publishSelect(labelObj);
+  // removeRow(row: number) {
+  //   this.removeItem(row);
   // }
 
+  // removeItem(index: number) {
+  //   const items = <FormArray>this.customerForm.get('items');
+  //   items.removeAt(index);
+  // }
+
+  /**
+   * Map the data from the form into the collection for
+   * submission to the web service.
+   * @param formData the data from the form collection.
+   */
   mapToCriteria(formData: any) {
     const criteriaList: SearchCriteria[] = [];
     formData['items'].forEach(element => {
@@ -88,15 +86,4 @@ export class CustomerComponent implements OnInit {
     this.criteriaList = criteriaList;
   }
 
-  // getSelectedOperations(type: any, index: number) {
-  //   const typegroup = typeGroup.find(item => item.type === type);
-  //   // console.log('typegroup: ', typegroup);
-  //   this.loadSupportedTypes(typegroup, index);
-  // }
-
-  // loadSupportedTypes(typegroup: any, index: number) {
-  //   const control = this.customerForm.get('items')['controls'][index];
-  //   // console.log('control: ', control);
-  //   this.supportedTypes = typegroup.supportedTypes;
-  // }
 }

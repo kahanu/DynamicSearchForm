@@ -6,19 +6,15 @@
     </div>
   </div>
   <form [formGroup]="customerForm">
-
     <div class="row">
       <div formArrayName="items" *ngFor="let item of customerForm.get('items')['controls']; let i = index;">
-          <div [formGroupName]="i">
+        <div [formGroupName]="i">
 
-          <app-row-search [rowForm]="customerForm.get('items')['controls'][i]" [row]="i" (addRow)="addRow()" (removeRow)="removeRow($event)"></app-row-search>
+          <app-row-search [rowForm]="customerForm.get('items')['controls'][i]" [parentForm]="customerForm" [row]="i"></app-row-search>
 
-          </div>
+        </div>
       </div>
     </div>
-
-    <!-- Chosen name: {{ customerForm.get('items')['controls'][i].controls.fieldValue.value }} -->
-
     <div>
       <button (click)="save()" class="btn btn-primary">Save</button>
     </div>

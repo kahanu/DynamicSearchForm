@@ -18,6 +18,6 @@
   </div>
   <div class="form-group col-md-2">
     <button (click)="addItem()" title="Add Item">+</button>
-    <button (click)="removeItem()" title="Remove Item">-</button>
+    <button (click)="removeItem()" title="Remove Item" *ngIf="this.parentForm.get('items')['controls'].length > 1">-</button>
   </div>
 </div>

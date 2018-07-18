@@ -20,7 +20,7 @@
               class="form-control">
           </div>
           <div class="form-group col-md-3" *ngIf="selectedDataType">
-            <app-form-select [form]="customerForm.get('items')['controls'][i]" [type]="selectedDataType" [controlName]="'operation'"></app-form-select>
+            <app-form-select [form]="customerForm.get('items')['controls'][i]" [controlName]="'operation'"></app-form-select>
           </div>
           <div class="form-group col-md-2">
             <button (click)="addItem()" title="Add Item">+</button>
@@ -37,13 +37,13 @@
     </div>
   </form>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6" *ngIf="results">
       <h4>Raw Form Results</h4>
-      <pre *ngIf="results">{{ results | json }}</pre>
+      <pre>{{ results | json }}</pre>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" *ngIf="criteriaList">
       <h4>Mapped Search Criteria List Array</h4>
-      <pre *ngIf="criteriaList">{{ criteriaList | json }}</pre>
+      <pre>{{ criteriaList | json }}</pre>
     </div>
   </div>
 

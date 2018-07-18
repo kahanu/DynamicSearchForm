@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { CustomerModule } from './customer/customer.module';
-import { DynamicFormModule } from './shared/dynamic/dynamic-form.module';
+import { CoreModule } from './core/core.module';
 
 
 @NgModule({
@@ -15,6 +15,7 @@ import { DynamicFormModule } from './shared/dynamic/dynamic-form.module';
   ],
   imports: [
     BrowserModule,
+    CoreModule,
     SharedModule,
     CustomerModule,
     AppRoutingModule

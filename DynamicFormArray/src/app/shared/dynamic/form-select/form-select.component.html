@@ -1,4 +1,4 @@
-<div [formGroup]="form" *ngIf="supportedTypes">
+<div [formGroup]="form">
   <select [formControlName]="controlName" class="form-control">
     <option [value]="op" *ngFor="let op of supportedTypes">{{ op }}</option>
   </select>

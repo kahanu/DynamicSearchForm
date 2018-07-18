@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { SearchCriteria } from '../shared/models';
 import { labelArrayData, typeGroup } from '../shared/form-config';
+import { SelectState } from '../shared/pubsub/models';
+import { PubSubService } from '../core/pub-sub.service';
 
 @Component({
   selector: 'app-customer',
@@ -16,7 +18,7 @@ export class CustomerComponent implements OnInit {
   supportedTypes: any[] = [];
   selectedDataType: string;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private pubSub: PubSubService) {}
 
   ngOnInit() {
     this.initForm();
@@ -71,11 +73,11 @@ export class CustomerComponent implements OnInit {
   }
 
   onLabelChange(value: any, index: number) {
-    // console.log('selected value: ', value);
-    const labelObj = labelArrayData.find(item => item.value === value);
-    // console.log('selected object: ', labelObj);
-    this.selectedDataType = labelObj.dataType;
-    this.getSelectedOperations(labelObj.dataType, index);
+    const labelObj: SelectState = labelArrayData.find(
+      item => item.value === value
+    );
+    console.log('label: ', labelObj);
+    this.pubSub.publishSelect(labelObj);
   }
 
   mapToCriteria(formData: any) {
@@ -100,7 +102,7 @@ export class CustomerComponent implements OnInit {
 
   loadSupportedTypes(typegroup: any, index: number) {
     const control = this.customerForm.get('items')['controls'][index];
-// console.log('control: ', control);
+    // console.log('control: ', control);
     this.supportedTypes = typegroup.supportedTypes;
   }
 }

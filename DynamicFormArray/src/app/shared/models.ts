@@ -28,8 +28,25 @@ export class SearchCriteria {
   Connector: any;
 }
 
-export class FormDataItem {
-  FieldName: string;
-  InputName: string;
-  InputType: string;
+export class LabelItem {
+  value: any;
+  text: any;
+  dataType: any;
+  inputType: any;
 }
+
+
+// export class FormDataItem {
+//   FieldName: string;
+//   InputName: string;
+//   InputType: string;
+// }
+
+// export class LabelItem {
+//   labelName: string;
+//   fieldValue: string;
+//   operation: string;
+//   dataType: string;
+//   inputType: string;
+//   connector: string;
+// }

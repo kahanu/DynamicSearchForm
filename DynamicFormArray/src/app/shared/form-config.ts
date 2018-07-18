@@ -1,17 +1,31 @@
-import { FormDataItem } from './models';
+import { LabelItem } from './models';
 
-export const config: FormDataItem[] = [];
-
-export const labelArrayData: any[] = [
-  { value: 'Phone', text: 'Phone', dataType: 'text' },
-  { value: 'FirstName', text: 'First Name', dataType: 'text' },
-  { value: 'LastName', text: 'Last Name', dataType: 'text' },
+export const labelArrayData: LabelItem[] = [
+  { value: 'Phone', text: 'Phone', inputType: 'text', dataType: 'String' },
+  {
+    value: 'FirstName',
+    text: 'First Name',
+    inputType: 'text',
+    dataType: 'String'
+  },
+  {
+    value: 'LastName',
+    text: 'Last Name',
+    inputType: 'text',
+    dataType: 'String'
+  },
   {
     value: 'ContributionAmount',
     text: 'Contribution Amount',
-    dataType: 'number'
+    inputType: 'number',
+    dataType: 'Decimal'
   },
-  { value: 'StartDate', text: 'Start Date', dataType: 'date' }
+  {
+    value: 'StartDate',
+    text: 'Start Date',
+    inputType: 'date',
+    dataType: 'DateTime'
+  }
 ];
 
 export const typeGroup: any[] = [

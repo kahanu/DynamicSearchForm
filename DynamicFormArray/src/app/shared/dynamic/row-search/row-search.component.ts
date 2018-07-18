@@ -17,9 +17,6 @@ export class RowSearchComponent implements OnInit {
   selectedDataType: string;
   supportedTypes: any[] = [];
 
-  // @Output() addRow: EventEmitter<boolean> = new EventEmitter<boolean>();
-  // @Output() removeRow: EventEmitter<any> = new EventEmitter<any>();
-
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -34,8 +31,12 @@ export class RowSearchComponent implements OnInit {
     const labelObj: SelectState = labelArrayData.find(
       item => item.value === value
     );
-    this.getSelectedOperations(labelObj.dataType);
-    this.selectedDataType = labelObj.dataType;
+
+    const rowObj = this.rowForm;
+    rowObj.controls['dataType'].setValue(labelObj.dataType);
+
+    this.getSelectedOperations(labelObj.inputType);
+    this.selectedDataType = labelObj.inputType;
   }
 
   removeItem() {
@@ -52,7 +53,6 @@ export class RowSearchComponent implements OnInit {
     this.supportedTypes = typegroup.supportedTypes;
   }
 
-
   createItem(item?: any): FormGroup {
     return this.fb.group({
       labelName: [item ? item.labelName : 'Phone'],
@@ -64,8 +64,21 @@ export class RowSearchComponent implements OnInit {
     });
   }
 
-  addItem() {
+  addItem(value?: any) {
+    const labelValue = value || 'Phone';
+
     const items = <FormArray>this.parentForm.get('items');
-    items.push(this.createItem());
+    const labelObj: SelectState = labelArrayData.find(
+      item => item.value === labelValue
+    );
+    const obj = {
+      labelName: labelObj.text,
+      fieldValue: labelObj.value,
+      operation: 'EqualTo',
+      dataType: labelObj.dataType,
+      inputType: labelObj.inputType,
+      connector: 'Or'
+    };
+    items.push(this.createItem(obj));
   }
 }

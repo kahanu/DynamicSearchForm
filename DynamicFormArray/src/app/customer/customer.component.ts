@@ -38,10 +38,6 @@ export class CustomerComponent implements OnInit {
     // TODO: send criteriaList to the web service.
   }
 
-  // addRow() {
-  //   this.addItem();
-  // }
-
   createItem(item?: any): FormGroup {
     return this.fb.group({
       labelName: [item ? item.labelName : 'Phone'],
@@ -57,15 +53,6 @@ export class CustomerComponent implements OnInit {
     const items = <FormArray>this.customerForm.get('items');
     items.push(this.createItem());
   }
-
-  // removeRow(row: number) {
-  //   this.removeItem(row);
-  // }
-
-  // removeItem(index: number) {
-  //   const items = <FormArray>this.customerForm.get('items');
-  //   items.removeAt(index);
-  // }
 
   /**
    * Map the data from the form into the collection for

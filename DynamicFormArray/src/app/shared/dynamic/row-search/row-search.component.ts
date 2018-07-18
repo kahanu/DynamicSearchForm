@@ -1,7 +1,8 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { SelectState } from '../../pubsub/models';
+// import { SelectState } from '../../pubsub/models';
 import { labelArrayData, typeGroup } from '../../form-config';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { LabelItem } from '../../models';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class RowSearchComponent implements OnInit {
   }
 
   onLabelChange(value: any) {
-    const labelObj: SelectState = labelArrayData.find(
+    const labelObj: LabelItem = labelArrayData.find(
       item => item.value === value
     );
 
@@ -68,7 +69,7 @@ export class RowSearchComponent implements OnInit {
     const labelValue = value || 'Phone';
 
     const items = <FormArray>this.parentForm.get('items');
-    const labelObj: SelectState = labelArrayData.find(
+    const labelObj: LabelItem = labelArrayData.find(
       item => item.value === labelValue
     );
     const obj = {

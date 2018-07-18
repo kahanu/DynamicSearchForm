@@ -1,5 +1,9 @@
 import { LabelItem } from './models';
 
+/**
+ * The data populates the first drop down that has the fields that will be searched.
+ * Example: Phone, FirstName, Date, etc.
+ */
 export const labelArrayData: LabelItem[] = [
   { value: 'Phone', text: 'Phone', inputType: 'text', dataType: 'String' },
   {
@@ -28,6 +32,11 @@ export const labelArrayData: LabelItem[] = [
   }
 ];
 
+/**
+ * The TypeGroup maps the selected input type ('text', 'date', 'number', etc)
+ * with the supported operation types for the drop down since different types
+ * require different operations.
+ */
 export const typeGroup: any[] = [
   { type: 'default', supportedTypes: ['EqualTo', 'NotEqualTo'] },
   {

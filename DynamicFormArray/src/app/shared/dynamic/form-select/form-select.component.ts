@@ -9,7 +9,6 @@ import { FormGroup } from '@angular/forms';
 export class FormSelectComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() controlName: string;
-
   @Input() supportedTypes: any[] = [];
 
   constructor() { }

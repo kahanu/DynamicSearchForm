@@ -1,8 +1,8 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-// import { SelectState } from '../../pubsub/models';
-import { labelArrayData, typeGroup } from '../../form-config';
+import { Component, OnInit, Input } from '@angular/core';
+import { labelArrayData } from '../../../customer/form-config';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { LabelItem } from '../../models';
+import { LabelItem } from '../models/models';
+import { typeGroup } from '../config/dynamic-config';
 
 
 @Component({
@@ -14,9 +14,11 @@ export class RowSearchComponent implements OnInit {
   @Input() rowForm: FormGroup;
   @Input() parentForm: FormGroup;
   @Input() row: any;
+  @Input() defaultValue = 'Phone';
   labelArray = labelArrayData;
   selectedDataType: string;
   supportedTypes: any[] = [];
+  placeHolder = 'Field Value';
 
   constructor(private fb: FormBuilder) { }
 
@@ -25,7 +27,7 @@ export class RowSearchComponent implements OnInit {
   }
 
   initForm() {
-    this.onLabelChange('Phone');
+    this.onLabelChange(this.defaultValue);
   }
 
   onLabelChange(value: any) {
@@ -35,9 +37,11 @@ export class RowSearchComponent implements OnInit {
 
     const rowObj = this.rowForm;
     rowObj.controls['dataType'].setValue(labelObj.dataType);
+    rowObj.controls['inputType'].setValue(labelObj.inputType);
 
     this.getSelectedOperations(labelObj.inputType);
     this.selectedDataType = labelObj.inputType;
+    this.placeHolder = labelObj.placeHolder;
   }
 
   removeItem() {
@@ -56,7 +60,7 @@ export class RowSearchComponent implements OnInit {
 
   createItem(item?: any): FormGroup {
     return this.fb.group({
-      labelName: [item ? item.labelName : 'Phone'],
+      labelName: [item ? item.labelName : this.defaultValue],
       fieldValue: [item ? item.fieldValue : ''],
       operation: [item ? item.operation : 'EqualTo'],
       dataType: [item ? item.dataType : 'String'],
@@ -66,15 +70,15 @@ export class RowSearchComponent implements OnInit {
   }
 
   addItem(value?: any) {
-    const labelValue = value || 'Phone';
+    const labelValue = value || this.defaultValue;
 
     const items = <FormArray>this.parentForm.get('items');
     const labelObj: LabelItem = labelArrayData.find(
       item => item.value === labelValue
     );
     const obj = {
-      labelName: labelObj.text,
-      fieldValue: labelObj.value,
+      labelName: labelObj.value,
+      fieldValue: '',
       operation: 'EqualTo',
       dataType: labelObj.dataType,
       inputType: labelObj.inputType,

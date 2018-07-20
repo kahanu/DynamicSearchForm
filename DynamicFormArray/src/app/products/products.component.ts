@@ -1,29 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { SearchCriteria } from '../shared/dynamic/models/models';
-import { labelArrayData } from './form-config';
+import { labelArrayData } from '../customer/form-config';
 
 @Component({
-  selector: 'app-customer',
-  templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.css']
+  selector: 'app-products',
+  templateUrl: './products.component.html',
+  styleUrls: ['./products.component.css']
 })
-export class CustomerComponent implements OnInit {
-  customerForm: FormGroup;
+export class ProductsComponent implements OnInit {
+  productForm: FormGroup;
   results: any[];
   criteriaList: SearchCriteria[];
   labelArray = labelArrayData;
   supportedTypes: any[] = [];
   selectedDataType: string;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.initForm();
   }
 
   initForm() {
-    this.customerForm = this.fb.group({
+    this.productForm = this.fb.group({
       items: this.fb.array([])
     });
 
@@ -31,7 +31,7 @@ export class CustomerComponent implements OnInit {
   }
 
   save() {
-    this.results = this.customerForm.value;
+    this.results = this.productForm.value;
     this.mapToCriteria(this.results);
     // TODO: send criteriaList to the web service.
   }
@@ -48,7 +48,7 @@ export class CustomerComponent implements OnInit {
   }
 
   addItem() {
-    const items = <FormArray>this.customerForm.get('items');
+    const items = <FormArray>this.productForm.get('items');
     items.push(this.createItem());
   }
 

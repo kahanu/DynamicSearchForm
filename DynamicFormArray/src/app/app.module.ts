@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { CustomerModule } from './customer/customer.module';
 import { CoreModule } from './core/core.module';
+import { ProductsModule } from './products/products.module';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { CoreModule } from './core/core.module';
     CoreModule,
     SharedModule,
     CustomerModule,
+    ProductsModule,
     AppRoutingModule
   ],
   providers: [],

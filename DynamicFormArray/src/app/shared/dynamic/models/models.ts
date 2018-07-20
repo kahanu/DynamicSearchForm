@@ -33,20 +33,5 @@ export class LabelItem {
   text: any;
   dataType: any;
   inputType: any;
+  placeHolder: string;
 }
-
-
-// export class FormDataItem {
-//   FieldName: string;
-//   InputName: string;
-//   InputType: string;
-// }
-
-// export class LabelItem {
-//   labelName: string;
-//   fieldValue: string;
-//   operation: string;
-//   dataType: string;
-//   inputType: string;
-//   connector: string;
-// }

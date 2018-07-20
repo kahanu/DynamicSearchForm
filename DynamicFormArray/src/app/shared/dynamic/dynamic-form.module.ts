@@ -14,7 +14,6 @@ import { RowSearchComponent } from './row-search/row-search.component';
     RowSearchComponent
   ],
   exports: [
-    // FormSelectComponent
     RowSearchComponent
   ],
   entryComponents: [

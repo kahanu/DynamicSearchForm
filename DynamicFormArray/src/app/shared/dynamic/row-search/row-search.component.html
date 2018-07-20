@@ -1,22 +1,22 @@
 <div [formGroup]="rowForm">
-  <div class="form-group col-md-3">
+  <div class="form-group col-sm-3">
     <select formControlName="labelName" class="form-control" (change)="onLabelChange($event.target.value)">
       <option [value]="label.value" *ngFor="let label of labelArray">{{ label.text }}</option>
     </select>
   </div>
-  <div class="form-group col-md-2" *ngIf="supportedTypes">
+  <div class="form-group col-sm-2" *ngIf="supportedTypes">
     <app-form-select [form]="rowForm" [controlName]="'operation'" [supportedTypes]="supportedTypes"></app-form-select>
   </div>
-  <div class="form-group col-md-4">
-    <input [type]="selectedDataType" formControlName="fieldValue" placeholder="Field Value" class="form-control">
+  <div class="form-group col-sm-4">
+    <input [type]="selectedDataType" formControlName="fieldValue" [placeholder]="placeHolder" class="form-control">
   </div>
-  <div class="form-group col-md-1">
+  <div class="form-group col-sm-2">
     <select class="form-control" formControlName="connector">
-        <option value="Or">Or</option>
-        <option value="And">And</option>
+      <option value="Or">Or</option>
+      <option value="And">And</option>
     </select>
   </div>
-  <div class="form-group col-md-2">
+  <div class="form-group col-sm-1">
     <button (click)="addItem()" title="Add Item">+</button>
     <button (click)="removeItem()" title="Remove Item" *ngIf="this.parentForm.get('items')['controls'].length > 1">-</button>
   </div>

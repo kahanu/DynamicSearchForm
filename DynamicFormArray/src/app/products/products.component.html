@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Dynamic Search Form - Products</h3>
+      <p>Angular 5+ dynamic search form creates an array of search terms that you can send to your service.</p>
+    </div>
+  </div>
+  <form [formGroup]="productForm">
+    <div class="row">
+      <div formArrayName="items" *ngFor="let item of productForm.get('items')['controls']; let i = index;">
+        <div [formGroupName]="i">
+
+          <app-row-search [rowForm]="productForm.get('items')['controls'][i]" [parentForm]="productForm" [row]="i"></app-row-search>
+
+        </div>
+      </div>
+    </div>
+    <div>
+      <button (click)="save()" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+  <div class="row">
+    <div class="col-md-6" *ngIf="results">
+      <h4>Raw Form Results</h4>
+      <pre>{{ results | json }}</pre>
+    </div>
+    <div class="col-md-6" *ngIf="criteriaList">
+      <h4>Mapped Search Criteria List Array</h4>
+      <pre>{{ criteriaList | json }}</pre>
+    </div>
+  </div>
+
+</div>

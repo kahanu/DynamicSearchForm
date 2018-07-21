@@ -24,8 +24,6 @@ export class RowSearchComponent implements OnInit {
 
   ngOnInit() {
     this.labelArray = this.config;
-    console.log('config: ', this.config);
-    console.log('label array: ', this.labelArray);
     this.initForm();
   }
 
@@ -34,7 +32,6 @@ export class RowSearchComponent implements OnInit {
   }
 
   onLabelChange(value: any) {
-    console.log('value: ', value);
     if (value) {
       const labelObj: LabelItem = this.config.find(
         item => item.value === value
@@ -47,6 +44,9 @@ export class RowSearchComponent implements OnInit {
       this.getSelectedOperations(labelObj.inputType);
       this.selectedDataType = labelObj.inputType;
       this.placeHolder = labelObj.placeHolder;
+    } else {
+      this.getSelectedOperations('text');
+      this.selectedDataType = 'text';
     }
   }
 
@@ -79,22 +79,24 @@ export class RowSearchComponent implements OnInit {
     const labelValue = value || this.defaultValue;
 
     const items = <FormArray>this.parentForm.get('items');
+    let labelObj: LabelItem;
     if (labelValue) {
-      const labelObj: LabelItem = this.config.find(
-        item => item.value === labelValue
-      );
-      const obj = {
-        labelName: labelObj.value,
-        fieldValue: '',
-        operation: 'EqualTo',
-        dataType: labelObj.dataType,
-        inputType: labelObj.inputType,
-        connector: 'Or'
-      };
-      items.push(this.createItem(obj));
+      labelObj = this.config.find(item => item.value === labelValue);
     } else {
-      items.push(this.createItem({}));
+      labelObj = new LabelItem();
+      labelObj.value = '';
+      labelObj.dataType = 'String';
+      labelObj.inputType = 'text';
     }
 
+    const obj = {
+      labelName: labelObj.value,
+      fieldValue: '',
+      operation: 'EqualTo',
+      dataType: labelObj.dataType,
+      inputType: labelObj.inputType,
+      connector: 'Or'
+    };
+    items.push(this.createItem(obj));
   }
 }

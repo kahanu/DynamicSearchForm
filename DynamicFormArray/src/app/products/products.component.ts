@@ -4,7 +4,6 @@ import { SearchCriteria, LabelItem } from '../shared/dynamic/models/models';
 import { productFieldNamesConfig } from './products-form.config';
 import { Helpers } from '../shared/dynamic/helpers/Helper';
 
-
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -40,7 +39,7 @@ export class ProductsComponent implements OnInit {
 
   createItem(item?: any): FormGroup {
     return this.fb.group({
-      labelName: [item ? item.labelName : 'Phone'],
+      labelName: [item ? item.labelName : 'ProductName'],
       fieldValue: [item ? item.fieldValue : ''],
       operation: [item ? item.operation : 'EqualTo'],
       dataType: [item ? item.dataType : 'String'],

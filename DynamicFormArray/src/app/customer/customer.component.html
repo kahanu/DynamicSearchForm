@@ -1,8 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h3>Dynamic Search Form</h3>
-      <p>Angular 5+ dynamic search form creates an array of search terms that you can send to your service.</p>
+      <h3>Dynamic Search Form - Customers</h3>
+      <p>Angular 5+ dynamic search form creates an array of search terms that you can send to your service that can dynamically build a Linq query.</p>
+      <p><a routerLink="/products">View Products</a></p>
     </div>
   </div>
   <form [formGroup]="customerForm">
@@ -10,7 +11,7 @@
       <div formArrayName="items" *ngFor="let item of customerForm.get('items')['controls']; let i = index;">
         <div [formGroupName]="i">
 
-          <app-row-search [config]="config" [rowForm]="customerForm.get('items')['controls'][i]" [parentForm]="customerForm" [row]="i"></app-row-search>
+          <app-row-search [config]="config" [rowForm]="customerForm.get('items')['controls'][i]" [parentForm]="customerForm" [row]="i" [defaultValue]="'Phone'"></app-row-search>
 
         </div>
       </div>

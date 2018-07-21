@@ -13,14 +13,13 @@ export class CustomerComponent implements OnInit {
   customerForm: FormGroup;
   results: any[];
   criteriaList: SearchCriteria[];
-  config: LabelItem[];
+  config: LabelItem[] = customerFieldNamesConfig;
   supportedTypes: any[] = [];
   selectedDataType: string;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.config = customerFieldNamesConfig;
     this.initForm();
   }
 

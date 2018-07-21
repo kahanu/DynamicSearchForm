@@ -5,7 +5,13 @@ import { LabelItem } from '../shared/dynamic/models/models';
  * Example: Phone, FirstName, Date, etc.
  */
 export const customerFieldNamesConfig: LabelItem[] = [
-  { value: 'Phone', text: 'Phone', inputType: 'text', dataType: 'String', placeHolder: 'Format: 8882229999' },
+  {
+    value: 'Phone',
+    text: 'Phone',
+    inputType: 'text',
+    dataType: 'String',
+    placeHolder: 'Format: 8882229999'
+  },
   {
     value: 'FirstName',
     text: 'First Name',

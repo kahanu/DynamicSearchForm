@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { labelArrayData } from '../../../customer/form-config';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { LabelItem } from '../models/models';
 import { typeGroup } from '../config/dynamic-config';
-
 
 @Component({
   selector: 'app-row-search',
@@ -14,15 +12,20 @@ export class RowSearchComponent implements OnInit {
   @Input() rowForm: FormGroup;
   @Input() parentForm: FormGroup;
   @Input() row: any;
-  @Input() defaultValue = 'Phone';
-  labelArray = labelArrayData;
+  @Input() defaultValue: string;
+  @Input() config: LabelItem[];
+
+  labelArray: LabelItem[];
   selectedDataType: string;
   supportedTypes: any[] = [];
   placeHolder = 'Field Value';
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
+    this.labelArray = this.config;
+    console.log('config: ', this.config);
+    console.log('label array: ', this.labelArray);
     this.initForm();
   }
 
@@ -31,17 +34,20 @@ export class RowSearchComponent implements OnInit {
   }
 
   onLabelChange(value: any) {
-    const labelObj: LabelItem = labelArrayData.find(
-      item => item.value === value
-    );
+    console.log('value: ', value);
+    if (value) {
+      const labelObj: LabelItem = this.config.find(
+        item => item.value === value
+      );
 
-    const rowObj = this.rowForm;
-    rowObj.controls['dataType'].setValue(labelObj.dataType);
-    rowObj.controls['inputType'].setValue(labelObj.inputType);
+      const rowObj = this.rowForm;
+      rowObj.controls['dataType'].setValue(labelObj.dataType);
+      rowObj.controls['inputType'].setValue(labelObj.inputType);
 
-    this.getSelectedOperations(labelObj.inputType);
-    this.selectedDataType = labelObj.inputType;
-    this.placeHolder = labelObj.placeHolder;
+      this.getSelectedOperations(labelObj.inputType);
+      this.selectedDataType = labelObj.inputType;
+      this.placeHolder = labelObj.placeHolder;
+    }
   }
 
   removeItem() {
@@ -73,17 +79,22 @@ export class RowSearchComponent implements OnInit {
     const labelValue = value || this.defaultValue;
 
     const items = <FormArray>this.parentForm.get('items');
-    const labelObj: LabelItem = labelArrayData.find(
-      item => item.value === labelValue
-    );
-    const obj = {
-      labelName: labelObj.value,
-      fieldValue: '',
-      operation: 'EqualTo',
-      dataType: labelObj.dataType,
-      inputType: labelObj.inputType,
-      connector: 'Or'
-    };
-    items.push(this.createItem(obj));
+    if (labelValue) {
+      const labelObj: LabelItem = this.config.find(
+        item => item.value === labelValue
+      );
+      const obj = {
+        labelName: labelObj.value,
+        fieldValue: '',
+        operation: 'EqualTo',
+        dataType: labelObj.dataType,
+        inputType: labelObj.inputType,
+        connector: 'Or'
+      };
+      items.push(this.createItem(obj));
+    } else {
+      items.push(this.createItem({}));
+    }
+
   }
 }

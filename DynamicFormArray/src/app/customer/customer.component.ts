@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { SearchCriteria } from '../shared/dynamic/models/models';
-import { labelArrayData } from './form-config';
+import { SearchCriteria, LabelItem } from '../shared/dynamic/models/models';
+import { customerFieldNamesConfig } from './form-config';
+import { Helpers } from '../shared/dynamic/helpers/Helper';
 
 @Component({
   selector: 'app-customer',
@@ -12,13 +13,14 @@ export class CustomerComponent implements OnInit {
   customerForm: FormGroup;
   results: any[];
   criteriaList: SearchCriteria[];
-  labelArray = labelArrayData;
+  config: LabelItem[];
   supportedTypes: any[] = [];
   selectedDataType: string;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
+    this.config = customerFieldNamesConfig;
     this.initForm();
   }
 
@@ -32,7 +34,7 @@ export class CustomerComponent implements OnInit {
 
   save() {
     this.results = this.customerForm.value;
-    this.mapToCriteria(this.results);
+    Helpers.mapToCriteria(this.results);
     // TODO: send criteriaList to the web service.
   }
 
@@ -52,23 +54,6 @@ export class CustomerComponent implements OnInit {
     items.push(this.createItem());
   }
 
-  /**
-   * Map the data from the form into the collection for
-   * submission to the web service.
-   * @param formData the data from the form collection.
-   */
-  mapToCriteria(formData: any) {
-    const criteriaList: SearchCriteria[] = [];
-    formData['items'].forEach(element => {
-      const criteria = new SearchCriteria();
-      criteria.FieldName = element.labelName;
-      criteria.FieldValue = element.fieldValue;
-      criteria.OperationName = element.operation;
-      criteria.Type = element.dataType;
-      criteria.Connector = element.connector;
-      criteriaList.push(criteria);
-    });
-    this.criteriaList = criteriaList;
-  }
+
 
 }

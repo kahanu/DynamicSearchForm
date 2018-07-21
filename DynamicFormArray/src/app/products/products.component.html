@@ -10,7 +10,7 @@
       <div formArrayName="items" *ngFor="let item of productForm.get('items')['controls']; let i = index;">
         <div [formGroupName]="i">
 
-          <app-row-search [rowForm]="productForm.get('items')['controls'][i]" [parentForm]="productForm" [row]="i"></app-row-search>
+          <app-row-search [config]="config" [rowForm]="productForm.get('items')['controls'][i]" [parentForm]="productForm" [row]="i"></app-row-search>
 
         </div>
       </div>

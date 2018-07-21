@@ -4,7 +4,7 @@ import { LabelItem } from '../shared/dynamic/models/models';
  * The data populates the first drop down that has the fields that will be searched.
  * Example: Phone, FirstName, Date, etc.
  */
-export const labelArrayData: LabelItem[] = [
+export const customerFieldNamesConfig: LabelItem[] = [
   { value: 'Phone', text: 'Phone', inputType: 'text', dataType: 'String', placeHolder: 'Format: 8882229999' },
   {
     value: 'FirstName',

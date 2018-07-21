@@ -34,7 +34,7 @@ export class CustomerComponent implements OnInit {
 
   save() {
     this.results = this.customerForm.value;
-    Helpers.mapToCriteria(this.results);
+    this.criteriaList = Helpers.mapToCriteria(this.results);
     // TODO: send criteriaList to the web service.
   }
 

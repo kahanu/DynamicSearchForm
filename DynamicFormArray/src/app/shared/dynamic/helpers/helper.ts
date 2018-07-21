@@ -18,6 +18,7 @@ export const Helpers = {
       criteria.Connector = element.connector;
       criteriaList.push(criteria);
     });
-    this.criteriaList = criteriaList;
+
+    return criteriaList;
   }
 };

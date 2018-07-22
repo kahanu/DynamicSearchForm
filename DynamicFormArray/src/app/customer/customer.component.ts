@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { SearchCriteria, LabelItem } from '../shared/dynamic/models/models';
-import { customerFieldNamesConfig } from './form-config';
+import { SearchCriteria, ConfigItem } from '../shared/dynamic/models/models';
+import { customerConfig } from './form-config';
 import { Helpers } from '../shared/dynamic/helpers/Helper';
 
 @Component({
@@ -13,7 +13,7 @@ export class CustomerComponent implements OnInit {
   customerForm: FormGroup;
   results: any[];
   criteriaList: SearchCriteria[];
-  config: LabelItem[] = customerFieldNamesConfig;
+  config: ConfigItem[] = customerConfig;
   supportedTypes: any[] = [];
   selectedDataType: string;
 

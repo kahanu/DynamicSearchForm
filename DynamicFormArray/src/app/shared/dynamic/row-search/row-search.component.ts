@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { LabelItem } from '../models/models';
+import { ConfigItem } from '../models/models';
 import { typeGroup } from '../config/dynamic-config';
 
 @Component({
@@ -13,9 +13,9 @@ export class RowSearchComponent implements OnInit {
   @Input() parentForm: FormGroup;
   @Input() row: any;
   @Input() defaultValue: string;
-  @Input() config: LabelItem[];
+  @Input() config: ConfigItem[];
 
-  labelArray: LabelItem[];
+  labelArray: ConfigItem[];
   selectedDataType: string;
   supportedTypes: any[] = [];
   placeHolder = 'Field Value';
@@ -33,7 +33,7 @@ export class RowSearchComponent implements OnInit {
 
   onLabelChange(value: any) {
     if (value) {
-      const labelObj: LabelItem = this.config.find(
+      const labelObj: ConfigItem = this.config.find(
         item => item.value === value
       );
 
@@ -79,11 +79,11 @@ export class RowSearchComponent implements OnInit {
     const labelValue = value || this.defaultValue;
 
     const items = <FormArray>this.parentForm.get('items');
-    let labelObj: LabelItem;
+    let labelObj: ConfigItem;
     if (labelValue) {
       labelObj = this.config.find(item => item.value === labelValue);
     } else {
-      labelObj = new LabelItem();
+      labelObj = new ConfigItem();
       labelObj.value = '';
       labelObj.dataType = 'String';
       labelObj.inputType = 'text';

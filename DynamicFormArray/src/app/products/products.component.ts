@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { SearchCriteria, LabelItem } from '../shared/dynamic/models/models';
+import { SearchCriteria, ConfigItem } from '../shared/dynamic/models/models';
 import { productFieldNamesConfig } from './products-form.config';
 import { Helpers } from '../shared/dynamic/helpers/Helper';
 
@@ -13,7 +13,7 @@ export class ProductsComponent implements OnInit {
   productForm: FormGroup;
   results: any[];
   criteriaList: SearchCriteria[];
-  config: LabelItem[] = productFieldNamesConfig;
+  config: ConfigItem[] = productFieldNamesConfig;
   supportedTypes: any[] = [];
   selectedDataType: string;
 

@@ -28,7 +28,7 @@ export class SearchCriteria {
   Connector: any;
 }
 
-export class LabelItem {
+export class ConfigItem {
   value: any;
   text: any;
   dataType: any;

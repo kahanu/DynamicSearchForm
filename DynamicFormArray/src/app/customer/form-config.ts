@@ -1,10 +1,10 @@
-import { LabelItem } from '../shared/dynamic/models/models';
+import { ConfigItem } from '../shared/dynamic/models/models';
 
 /**
  * The data populates the first drop down that has the fields that will be searched.
  * Example: Phone, FirstName, Date, etc.
  */
-export const customerFieldNamesConfig: LabelItem[] = [
+export const customerConfig: ConfigItem[] = [
   {
     value: 'Phone',
     text: 'Phone',

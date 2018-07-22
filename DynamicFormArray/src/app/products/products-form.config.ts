@@ -4,7 +4,7 @@ import { ConfigItem } from '../shared/dynamic/models/models';
  * The data populates the first drop down that has the fields that will be searched.
  * Example: Phone, FirstName, Date, etc.
  */
-export const productFieldNamesConfig: ConfigItem[] = [
+export const productsConfig: ConfigItem[] = [
   {
     value: 'ProductName',
     text: 'Product Name',

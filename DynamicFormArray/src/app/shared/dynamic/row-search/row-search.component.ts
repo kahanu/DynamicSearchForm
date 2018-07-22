@@ -9,64 +9,63 @@ import { typeGroup } from '../config/dynamic-config';
   styleUrls: ['./row-search.component.css']
 })
 export class RowSearchComponent implements OnInit {
-  @Input() rowForm: FormGroup;
-  @Input() parentForm: FormGroup;
+  @Input() form: FormGroup;
   @Input() row: any;
-  @Input() defaultValue: string;
+  @Input() defaultFieldValue: string;
   @Input() config: ConfigItem[];
 
+  rowForm: FormGroup;
   labelArray: ConfigItem[];
-  selectedDataType: string;
   supportedTypes: any[] = [];
   placeHolder = 'Field Value';
+  rowConfig: ConfigItem;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
+    this.getRowForm();
     this.labelArray = this.config;
     this.initForm();
   }
 
+  getRowForm() {
+    this.rowForm = this.form.get('items')['controls'][this.row];
+  }
+
   initForm() {
-    this.onLabelChange(this.defaultValue);
+    this.onLabelChange(this.defaultFieldValue);
   }
 
   onLabelChange(value: any) {
     if (value) {
-      const labelObj: ConfigItem = this.config.find(
+      this.rowConfig = this.config.find(
         item => item.value === value
       );
 
       const rowObj = this.rowForm;
-      rowObj.controls['dataType'].setValue(labelObj.dataType);
-      rowObj.controls['inputType'].setValue(labelObj.inputType);
+      rowObj.controls['dataType'].setValue(this.rowConfig.dataType);
+      rowObj.controls['inputType'].setValue(this.rowConfig.inputType);
 
-      this.getSelectedOperations(labelObj.inputType);
-      this.selectedDataType = labelObj.inputType;
-      this.placeHolder = labelObj.placeHolder;
+      this.getSelectedOperations(this.rowConfig.inputType);
     } else {
       this.getSelectedOperations('text');
-      this.selectedDataType = 'text';
+      this.rowConfig.inputType = 'text';
     }
   }
 
   removeItem() {
-    const items = <FormArray>this.parentForm.get('items');
+    const items = <FormArray>this.form.get('items');
     items.removeAt(this.row);
   }
 
   getSelectedOperations(type: any) {
     const typegroup = typeGroup.find(item => item.type === type);
-    this.loadSupportedTypes(typegroup);
-  }
-
-  loadSupportedTypes(typegroup: any) {
     this.supportedTypes = typegroup.supportedTypes;
   }
 
   createItem(item?: any): FormGroup {
     return this.fb.group({
-      labelName: [item ? item.labelName : this.defaultValue],
+      labelName: [item ? item.labelName : this.defaultFieldValue],
       fieldValue: [item ? item.fieldValue : ''],
       operation: [item ? item.operation : 'EqualTo'],
       dataType: [item ? item.dataType : 'String'],
@@ -76,9 +75,9 @@ export class RowSearchComponent implements OnInit {
   }
 
   addItem(value?: any) {
-    const labelValue = value || this.defaultValue;
+    const labelValue = value || this.defaultFieldValue;
 
-    const items = <FormArray>this.parentForm.get('items');
+    const items = <FormArray>this.form.get('items');
     let labelObj: ConfigItem;
     if (labelValue) {
       labelObj = this.config.find(item => item.value === labelValue);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { SearchCriteria, ConfigItem } from '../shared/dynamic/models/models';
-import { productFieldNamesConfig } from './products-form.config';
+import { productsConfig } from './products-form.config';
 import { Helpers } from '../shared/dynamic/helpers/Helper';
 
 @Component({
@@ -13,7 +13,7 @@ export class ProductsComponent implements OnInit {
   productForm: FormGroup;
   results: any[];
   criteriaList: SearchCriteria[];
-  config: ConfigItem[] = productFieldNamesConfig;
+  config: ConfigItem[] = productsConfig;
   supportedTypes: any[] = [];
   selectedDataType: string;
 

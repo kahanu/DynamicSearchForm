@@ -11,7 +11,7 @@
       <div formArrayName="items" *ngFor="let item of productForm.get('items')['controls']; let i = index;">
         <div [formGroupName]="i">
 
-          <app-row-search [config]="config" [rowForm]="productForm.get('items')['controls'][i]" [parentForm]="productForm" [row]="i" [defaultValue]="'ProductName'"></app-row-search>
+          <app-row-search [config]="config" [form]="productForm" [row]="i" [defaultFieldValue]="'ProductName'"></app-row-search>
 
         </div>
       </div>

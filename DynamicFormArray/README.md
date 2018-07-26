@@ -1,4 +1,4 @@
-# DynamicFormArray
+# Dynamic Search Form
 
 This project demonstrates how to implement a Dynamic Search Form in an Angular application that will create a custom request object that can be POSTed to and web service.
 

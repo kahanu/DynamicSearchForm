@@ -11,7 +11,7 @@
       <div formArrayName="items" *ngFor="let item of customerForm.get('items')['controls']; let i = index;">
         <div [formGroupName]="i">
 
-          <app-row-search [config]="config" [form]="customerForm" [row]="i" [defaultFieldValue]="'Phone'"></app-row-search>
+          <app-row-search [config]="config" [form]="customerForm" [row]="i" [defaultFieldValue]="'CustomerName'"></app-row-search>
 
         </div>
       </div>
@@ -20,7 +20,7 @@
       <button (click)="save()" class="btn btn-primary">Save</button>
     </div>
   </form>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-6" *ngIf="results">
       <h4>Raw Form Results</h4>
       <pre>{{ results | json }}</pre>
@@ -28,6 +28,37 @@
     <div class="col-md-6" *ngIf="criteriaList">
       <h4>Mapped Search Criteria List Array</h4>
       <pre>{{ criteriaList | json }}</pre>
+    </div>
+  </div> -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table" *ngIf="customerList">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Customer Name</th>
+            <th>Phone</th>
+            <th>Delivery Addr 1</th>
+            <th>Delivery Addr 2</th>
+            <th>Delivery ZipCode</th>
+            <th>Postal Addr 1</th>
+            <th>Postal Addr 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cust of customerList">
+            <td>{{ cust.CustomerId }}</td>
+            <td>{{ cust.CustomerName }}</td>
+            <td>{{ cust.PhoneNumber }}</td>
+            <td>{{ cust.DeliveryAddressLine1 }}</td>
+            <td>{{ cust.DeliveryAddressLine2 }}</td>
+            <td>{{ cust.DeliveryPostalCode }}</td>
+            <td>{{ cust.PostalAddressLine1 }}</td>
+            <td>{{ cust.PostalAddressLine2 }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 

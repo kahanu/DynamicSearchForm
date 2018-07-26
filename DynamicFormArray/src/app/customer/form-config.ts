@@ -6,38 +6,52 @@ import { ConfigItem } from '../shared/dynamic/models/models';
  */
 export const customerConfig: ConfigItem[] = [
   {
-    value: 'Phone',
-    text: 'Phone',
-    inputType: 'text',
-    dataType: 'String',
-    placeHolder: 'Format: 8882229999'
-  },
-  {
-    value: 'FirstName',
-    text: 'First Name',
+    value: 'CustomerName',
+    text: 'Customer Name',
     inputType: 'text',
     dataType: 'String',
     placeHolder: ''
   },
   {
-    value: 'LastName',
-    text: 'Last Name',
+    value: 'PhoneNumber',
+    text: 'Phone Number',
     inputType: 'text',
     dataType: 'String',
     placeHolder: ''
   },
   {
-    value: 'ContributionAmount',
-    text: 'Contribution Amount',
-    inputType: 'number',
-    dataType: 'Decimal',
-    placeHolder: '000.00'
+    value: 'DeliveryAddressLine1',
+    text: 'Delivery Address 1',
+    inputType: 'text',
+    dataType: 'String',
+    placeHolder: ''
   },
   {
-    value: 'Date',
-    text: 'Date',
-    inputType: 'date',
-    dataType: 'DateTime',
+    value: 'DeliveryAddressLine2',
+    text: 'Delivery Address 2',
+    inputType: 'text',
+    dataType: 'String',
+    placeHolder: ''
+  },
+  {
+    value: 'DeliveryPostalCode',
+    text: 'Delivery Postal Code',
+    inputType: 'text',
+    dataType: 'String',
+    placeHolder: ''
+  },
+  {
+    value: 'PostalAddressLine1',
+    text: 'Postal Address 1',
+    inputType: 'text',
+    dataType: 'String',
+    placeHolder: ''
+  },
+  {
+    value: 'PostalAddressLine2',
+    text: 'Postal Address 2',
+    inputType: 'text',
+    dataType: 'String',
     placeHolder: ''
   }
 ];

@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { SearchCriteria, ConfigItem } from '../shared/dynamic/models/models';
 import { customerConfig } from './form-config';
 import { Helpers } from '../shared/dynamic/helpers/Helper';
+import { CustomerService } from '../core/services/organization/customer.service';
+import { Customer } from '../shared/models/models';
 
 @Component({
   selector: 'app-customer',
@@ -16,8 +18,12 @@ export class CustomerComponent implements OnInit {
   config: ConfigItem[] = customerConfig;
   supportedTypes: any[] = [];
   selectedDataType: string;
+  customerList: Customer[];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private customerService: CustomerService
+  ) {}
 
   ngOnInit() {
     this.initForm();
@@ -34,12 +40,22 @@ export class CustomerComponent implements OnInit {
   save() {
     this.results = this.customerForm.value;
     this.criteriaList = Helpers.mapToCriteria(this.results);
-    // TODO: send criteriaList to the web service.
+
+    const payload = {
+      SearchCriteria: this.criteriaList
+    };
+
+    this.customerService.save(payload, 'customers')
+      .subscribe(res => {
+        if (res.Success) {
+          this.customerList = res['CustomerList'] as Customer[];
+        }
+      });
   }
 
   createItem(item?: any): FormGroup {
     return this.fb.group({
-      labelName: [item ? item.labelName : 'Phone'],
+      labelName: [item ? item.labelName : 'CustomerName'],
       fieldValue: [item ? item.fieldValue : ''],
       operation: [item ? item.operation : 'EqualTo'],
       dataType: [item ? item.dataType : 'String'],
@@ -52,7 +68,4 @@ export class CustomerComponent implements OnInit {
     const items = <FormArray>this.customerForm.get('items');
     items.push(this.createItem());
   }
-
-
-
 }

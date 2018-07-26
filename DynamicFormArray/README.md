@@ -8,6 +8,6 @@ But this Angular Search Form component can be used with any back-end to handle t
 
 ![alt text](https://github.com/kahanu/DynamicSearchForm/blob/master/angular-form.jpg "Angular Dynamic Search Form")
 
-Stay tuned.  
 
-Date: July 21, 2018
+Date: July 25, 2018 - added Http service to communicate with .Net WebApi project in Customers module.
+Date: July 21, 2018 - initial app

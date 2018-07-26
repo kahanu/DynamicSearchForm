@@ -8,6 +8,12 @@ But this Angular Search Form component can be used with any back-end to handle t
 
 ![alt text](https://github.com/kahanu/DynamicSearchForm/blob/master/angular-form.jpg "Angular Dynamic Search Form")
 
+## .Net WebApi Companion Project
+
+I've created a simple .Net WebApi project that can consume the payload from the customer form and return a result.  It's a Visual Studio 2017 project using .NET Framework 4.6.1.
+
+[Full Text Search WebApi](https://github.com/kahanu/FullTextSearchWebApi)
+
 
 Date: July 25, 2018 - added Http service to communicate with .Net WebApi project in Customers module.
 

@@ -6,6 +6,8 @@ There will be a companion project to this one, which is an ASP.NET WebApi projec
 
 But this Angular Search Form component can be used with any back-end to handle the database querying, but you would have to provide the code for that yourself.
 
+![alt text](https://github.com/kahanu/DynamicSearchForm/tree/master/DynamicFormArray/src/assets/images/angular-form.jpg "Angular Dynamic Search Form")
+
 Stay tuned.  
 
 Date: July 21, 2018

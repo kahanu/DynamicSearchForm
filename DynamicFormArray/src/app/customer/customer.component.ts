@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { SearchCriteria, ConfigItem } from '../shared/dynamic/models/models';
 import { customerConfig } from './form-config';
 import { Helpers } from '../shared/dynamic/helpers/Helper';
 import { CustomerService } from '../core/services/organization/customer.service';
 import { Customer } from '../shared/models/models';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.css']
 })
-export class CustomerComponent implements OnInit {
+export class CustomerComponent implements OnInit, OnDestroy {
   customerForm: FormGroup;
   results: any[];
   criteriaList: SearchCriteria[];
@@ -28,6 +30,8 @@ export class CustomerComponent implements OnInit {
   ngOnInit() {
     this.initForm();
   }
+
+  ngOnDestroy() {}
 
   initForm() {
     this.customerForm = this.fb.group({

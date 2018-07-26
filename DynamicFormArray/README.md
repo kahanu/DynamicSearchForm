@@ -10,4 +10,5 @@ But this Angular Search Form component can be used with any back-end to handle t
 
 
 Date: July 25, 2018 - added Http service to communicate with .Net WebApi project in Customers module.
+
 Date: July 21, 2018 - initial app
